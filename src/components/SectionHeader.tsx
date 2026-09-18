@@ -1,52 +1,54 @@
 import { useInView } from '../hooks/useInView';
-import type { SectionMeta } from '../data/sections';
+import { SplitText } from './SplitText';
 
-interface Props extends Pick<SectionMeta, 'eyebrow' | 'headline' | 'subline'> {
-  /** Optional alignment */
+interface Props {
+  eyebrow: string;
+  headline: string;
+  subline?: string;
   align?: 'left' | 'center';
-  /** Optional id for scroll target */
-  id?: string;
-  /** Visual variant */
-  variant?: 'default' | 'compact' | 'tight';
+  index?: string;
 }
 
-/**
- * Reusable section header: eyebrow → headline → subline, with reveal-on-scroll.
- * The headline may contain a "\n" to insert a manual line break.
- */
-export function SectionHeader({ eyebrow, headline, subline, align = 'left', id, variant = 'default' }: Props) {
+export function SectionHeader({ eyebrow, headline, subline, align = 'left', index }: Props) {
   const { ref } = useInView<HTMLDivElement>({ once: true });
 
   return (
     <div
       ref={ref}
-      id={id}
-      className={`section-header section-header--${align} section-header--${variant}`}
-      style={{
-        textAlign: align,
-        marginLeft: align === 'center' ? 'auto' : undefined,
-        marginRight: align === 'center' ? 'auto' : undefined,
-        maxWidth: align === 'center' ? '880px' : '780px',
-      }}
+      className={`section-header section-header--${align}`}
+      style={{ textAlign: align }}
     >
-      <span className="eyebrow" data-reveal>
-        {eyebrow}
-      </span>
-      <h2 className="h-section" data-reveal style={{ marginTop: 'var(--sp-4)' }}>
-        {headline.split('\n').map((line, i) => (
-          <span key={i} style={{ display: 'block' }}>{line}</span>
-        ))}
+      <div className="section-header__top" data-reveal="fade">
+        <span className="eyebrow">{eyebrow}</span>
+        {index && <span className="section-header__index">{index}</span>}
+      </div>
+      <h2 className="h-section section-header__headline" style={{ marginTop: 'var(--sp-5)' }}>
+        <SplitText text={headline} />
       </h2>
       {subline && (
-        <p className="h-sub" data-reveal style={{ marginTop: 'var(--sp-4)', marginLeft: align === 'center' ? 'auto' : undefined, marginRight: align === 'center' ? 'auto' : undefined }}>
+        <p className="h-body section-header__sub" data-reveal style={{ marginTop: 'var(--sp-5)', marginLeft: align === 'center' ? 'auto' : undefined, marginRight: align === 'center' ? 'auto' : undefined }}>
           {subline}
         </p>
       )}
       <style>{`
         .section-header { display: flex; flex-direction: column; gap: var(--sp-1); }
-        .section-header--center { align-items: center; text-align: center; }
-        .section-header--center .h-sub { margin-inline: auto; }
-        .section-header--tight { gap: 0; }
+        .section-header--center { align-items: center; }
+        .section-header--center .section-header__sub { margin-inline: auto; }
+        .section-header__top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: var(--sp-4);
+        }
+        .section-header--center .section-header__top { justify-content: center; }
+        .section-header__index {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          letter-spacing: 0.18em;
+          color: var(--text-dim);
+        }
+        .section-header__headline { max-width: 18ch; }
+        .section-header--center .section-header__headline { max-width: none; }
       `}</style>
     </div>
   );

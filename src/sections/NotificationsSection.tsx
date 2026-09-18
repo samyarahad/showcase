@@ -5,7 +5,7 @@ export function NotificationsSection() {
     <ProceduralSection
       id="notifications"
       eyebrow="NOTIFICATIONS"
-      headline="Stay informed."
+      headline="Stay\ninformed."
       subline="A quiet, deliberate channel for what matters."
       variant="notifications"
       flip="left"

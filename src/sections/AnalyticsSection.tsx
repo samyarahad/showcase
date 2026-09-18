@@ -5,7 +5,7 @@ export function AnalyticsSection() {
     <ProceduralSection
       id="analytics"
       eyebrow="ANALYTICS"
-      headline="See the patterns."
+      headline="See the\npatterns."
       subline="Charts emerge from noise — trends become legible."
       variant="analytics"
       flip="right"

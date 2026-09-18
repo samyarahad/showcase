@@ -5,7 +5,7 @@ export function LogsSection() {
     <ProceduralSection
       id="logs"
       eyebrow="LOGS"
-      headline="See what happened."
+      headline="See what\nhappened."
       subline="A cinematic stream of system events, organized by time."
       variant="logs"
       flip="right"

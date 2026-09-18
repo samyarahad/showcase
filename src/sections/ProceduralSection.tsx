@@ -1,6 +1,7 @@
 import { SectionHeader } from '../components/SectionHeader';
 import { ProceduralCanvas, type ProceduralVariant } from '../components/ProceduralCanvas';
 import { useInView } from '../hooks/useInView';
+import { sectionIndex } from '../data/sections';
 
 interface Props {
   id: string;
@@ -9,29 +10,30 @@ interface Props {
   subline: string;
   variant: ProceduralVariant;
   features: { title: string; desc: string }[];
-  /** Schematic chips — small labels rendered below the visual */
   chips?: string[];
-  /** Section accent color hint for the glow ring around the visual */
-  accent?: string;
   flip?: 'left' | 'right';
-  fullBleedVisual?: boolean;
 }
 
-/**
- * Two-column section for the procedural scenes: header + features on one
- * side, an animated canvas visualization on the other.
- */
-export function ProceduralSection({ id, eyebrow, headline, subline, variant, features, chips, flip = 'right', fullBleedVisual = false }: Props) {
+export function ProceduralSection({ id, eyebrow, headline, subline, variant, features, chips, flip = 'right' }: Props) {
   const { ref, inView } = useInView<HTMLDivElement>({ once: false, threshold: 0.15 });
 
   return (
-    <section id={id} className={`section proc-section ${fullBleedVisual ? 'proc-section--bleed' : ''}`} aria-labelledby={`${id}-h`}>
+    <section id={id} className="section proc-section" aria-labelledby={`${id}-h`}>
       <div ref={ref} className="container-wide">
         <div className={`proc-section__grid proc-section__grid--${flip}`}>
           <div className="proc-section__visual" data-reveal="scale">
             <div className="proc-section__visual-frame">
               <div className="proc-section__visual-glow" aria-hidden />
               <ProceduralCanvas variant={variant} active={inView} />
+              <div className="proc-section__overlay">
+                <div className="proc-section__overlay-tl">
+                  <span className="proc-section__overlay-dot" />
+                  <span className="proc-section__overlay-text">LIVE PREVIEW</span>
+                </div>
+                <div className="proc-section__overlay-br">
+                  <span className="proc-section__overlay-text">{sectionIndex(id)}</span>
+                </div>
+              </div>
               {chips && (
                 <div className="proc-section__chips">
                   {chips.map((c) => (
@@ -42,11 +44,11 @@ export function ProceduralSection({ id, eyebrow, headline, subline, variant, fea
             </div>
           </div>
           <div className="proc-section__text">
-            <SectionHeader eyebrow={eyebrow} headline={headline} subline={subline} />
-            <ul className="proc-section__features" style={{ marginTop: 'var(--sp-6)' }}>
+            <SectionHeader eyebrow={eyebrow} headline={headline} subline={subline} index={sectionIndex(id)} />
+            <ul className="proc-section__features" style={{ marginTop: 'var(--sp-7)' }}>
               {features.map((f, i) => (
                 <li key={f.title} data-reveal style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}>
-                  <span className="proc-section__feature-dot" aria-hidden />
+                  <span className="proc-section__feature-index">{String(i + 1).padStart(2, '0')}</span>
                   <div>
                     <h3 className="proc-section__feature-title">{f.title}</h3>
                     <p className="proc-section__feature-desc">{f.desc}</p>
@@ -61,18 +63,21 @@ export function ProceduralSection({ id, eyebrow, headline, subline, variant, fea
         .proc-section__grid {
           display: grid;
           grid-template-columns: 1.1fr 1fr;
-          gap: var(--sp-7);
+          gap: var(--sp-10);
           align-items: center;
         }
         .proc-section__grid--left .proc-section__visual { order: 1; }
         .proc-section__grid--left .proc-section__text { order: 2; }
         .proc-section__grid--right .proc-section__visual { order: 2; }
         .proc-section__grid--right .proc-section__text { order: 1; }
+
         .proc-section__visual-frame {
           position: relative;
           aspect-ratio: 16 / 11;
-          border-radius: var(--r-lg);
-          background: linear-gradient(180deg, rgba(15, 16, 36, 0.8), rgba(7, 8, 21, 0.9));
+          border-radius: var(--r-2xl);
+          background:
+            radial-gradient(ellipse at 50% 0%, rgba(168, 85, 247, 0.06), transparent 60%),
+            linear-gradient(180deg, rgba(15, 16, 36, 0.85), rgba(7, 8, 21, 0.95));
           border: 1px solid var(--line-strong);
           overflow: hidden;
           box-shadow: var(--shadow-float);
@@ -80,7 +85,7 @@ export function ProceduralSection({ id, eyebrow, headline, subline, variant, fea
         .proc-section__visual-glow {
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(168, 85, 247, 0.18), transparent 70%);
+          background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(168, 85, 247, 0.14), transparent 70%);
           pointer-events: none;
           z-index: 1;
         }
@@ -89,11 +94,44 @@ export function ProceduralSection({ id, eyebrow, headline, subline, variant, fea
           inset: 0;
           z-index: 0;
         }
+
+        .proc-section__overlay {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          pointer-events: none;
+        }
+        .proc-section__overlay-tl {
+          position: absolute;
+          top: 18px;
+          left: 18px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .proc-section__overlay-br {
+          position: absolute;
+          bottom: 18px;
+          right: 18px;
+        }
+        .proc-section__overlay-dot {
+          width: 6px; height: 6px;
+          border-radius: 50%;
+          background: #2dd4bf;
+          box-shadow: 0 0 8px #2dd4bf;
+          animation: proc-pulse 1.8s ease-in-out infinite;
+        }
+        .proc-section__overlay-text {
+          font-family: var(--font-mono);
+          font-size: 0.58rem;
+          letter-spacing: 0.2em;
+          color: var(--text-lo);
+        }
+
         .proc-section__chips {
           position: absolute;
-          bottom: 12px;
-          left: 12px;
-          right: 12px;
+          bottom: 18px;
+          left: 18px;
           z-index: 2;
           display: flex;
           flex-wrap: wrap;
@@ -102,16 +140,17 @@ export function ProceduralSection({ id, eyebrow, headline, subline, variant, fea
         }
         .proc-section__chip {
           font-family: var(--font-mono);
-          font-size: 0.62rem;
+          font-size: 0.6rem;
           letter-spacing: 0.16em;
           text-transform: uppercase;
           padding: 4px 10px;
           border-radius: var(--r-pill);
-          background: rgba(7, 8, 21, 0.7);
+          background: rgba(6, 7, 19, 0.7);
           border: 1px solid var(--line);
           color: var(--text-lo);
           backdrop-filter: blur(6px);
         }
+
         .proc-section__features {
           display: flex;
           flex-direction: column;
@@ -119,41 +158,45 @@ export function ProceduralSection({ id, eyebrow, headline, subline, variant, fea
         }
         .proc-section__features li {
           display: flex;
-          gap: var(--sp-4);
-          padding: var(--sp-4);
-          border-radius: var(--r-md);
-          background: var(--bg-glass);
-          border: 1px solid var(--line);
-          backdrop-filter: blur(8px);
-          transition: transform var(--dur) var(--ease-out), border-color var(--dur);
+          gap: var(--sp-5);
+          padding: var(--sp-5) 0;
+          border-top: 1px solid var(--line);
+          transition: padding 0.4s var(--ease-out);
         }
-        .proc-section__features li:hover {
-          transform: translateY(-2px);
-          border-color: var(--line-strong);
-        }
-        .proc-section__feature-dot {
-          width: 6px; height: 6px;
-          margin-top: 8px;
-          border-radius: 50%;
-          background: var(--grad-brand);
-          box-shadow: 0 0 12px rgba(168, 85, 247, 0.7);
+        .proc-section__features li:last-child { border-bottom: 1px solid var(--line); }
+        .proc-section__features li:hover { padding-left: var(--sp-3); }
+        .proc-section__feature-index {
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          letter-spacing: 0.18em;
+          color: var(--accent);
           flex-shrink: 0;
+          padding-top: 2px;
         }
         .proc-section__feature-title {
-          font-size: 0.95rem;
+          font-size: 1rem;
           font-weight: 600;
           color: var(--text-hi);
+          letter-spacing: -0.01em;
         }
         .proc-section__feature-desc {
-          margin-top: 4px;
-          font-size: 0.86rem;
+          margin-top: 6px;
+          font-size: 0.88rem;
           color: var(--text-mid);
           line-height: 1.55;
+        }
+
+        @keyframes proc-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.4; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .proc-section__overlay-dot { animation: none; }
         }
         @media (max-width: 1024px) {
           .proc-section__grid {
             grid-template-columns: 1fr;
-            gap: var(--sp-6);
+            gap: var(--sp-8);
           }
           .proc-section__grid--left .proc-section__visual,
           .proc-section__grid--right .proc-section__visual { order: 1; }

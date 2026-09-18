@@ -5,7 +5,7 @@ export function ConfigGeneratorSection() {
     <ProceduralSection
       id="config"
       eyebrow="CONFIG GENERATOR"
-      headline="Complexity, organized."
+      headline="Complexity,\norganized."
       subline="Parameters flow into a single, organized configuration object."
       variant="config"
       flip="right"

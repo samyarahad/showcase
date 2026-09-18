@@ -1,16 +1,17 @@
 import { SectionHeader } from '../components/SectionHeader';
 import { ScreenshotFrame } from '../components/ScreenshotFrame';
 import { useInView } from '../hooks/useInView';
+import { sectionIndex } from '../data/sections';
 
 const STATS = [
-  { label: 'TOTAL USERS',          color: 'var(--accent-teal)' },
-  { label: 'ACTIVE USERS',         color: 'var(--accent-violet)' },
-  { label: 'ONLINE USERS',         color: 'var(--accent-teal)' },
-  { label: 'DAILY REQUESTS',       color: 'var(--accent-amber)' },
-  { label: 'ACTIVE SERVERS',       color: 'var(--accent-blue)' },
-  { label: 'CLOUDFLARE ACCOUNTS',  color: 'var(--accent-teal)' },
-  { label: 'TOTAL TRAFFIC',        color: 'var(--accent-pink)' },
-  { label: 'IP HEALTH',            color: 'var(--accent-amber)' },
+  { label: 'TOTAL USERS',         color: '#2dd4bf', desc: 'Every identity in your network' },
+  { label: 'ACTIVE USERS',        color: '#a855f7', desc: 'Currently provisioned access' },
+  { label: 'ONLINE USERS',        color: '#22d3ee', desc: 'Connected right now' },
+  { label: 'DAILY REQUESTS',      color: '#f59e0b', desc: 'Aggregated across endpoints' },
+  { label: 'ACTIVE SERVERS',      color: '#6366f1', desc: 'Registered & responding' },
+  { label: 'CLOUDFLARE ACCOUNTS', color: '#2dd4bf', desc: 'Linked infrastructure' },
+  { label: 'TOTAL TRAFFIC',       color: '#ec4899', desc: 'Sum across all routes' },
+  { label: 'IP HEALTH',           color: '#f59e0b', desc: 'Reachable / total' },
 ];
 
 export function DashboardSection() {
@@ -21,71 +22,96 @@ export function DashboardSection() {
       <div ref={ref} className="container-wide">
         <SectionHeader
           eyebrow="DASHBOARD"
-          headline="See everything at a glance."
-          subline="A single panoramic view of users, servers, traffic and infrastructure health."
+          headline="See everything\nat a glance."
+          subline="A single panoramic view of users, servers, traffic and infrastructure health — every moving part, one screen."
+          index={sectionIndex('dashboard')}
         />
 
-        <div className="dashboard__grid" style={{ marginTop: 'var(--sp-7)' }}>
+        <div className="dashboard__layout">
           <div className="dashboard__shot" data-reveal="scale">
             <ScreenshotFrame
               src="./screenshot-dashboard.png"
               alt="Pixel & Ping dashboard — overview of users, servers, traffic and IP health"
-              caption="Pixel & Ping · Dashboard"
+              url="app.pixel-ping.io/dashboard"
+              caption="Dashboard · Total panorama"
+              index={sectionIndex('dashboard')}
             />
           </div>
 
-          <ul className="dashboard__stats">
-            {STATS.map((s, i) => (
-              <li key={s.label} data-reveal style={{ '--reveal-delay': `${i * 60}ms` } as React.CSSProperties}>
-                <span className="dashboard__stat-dot" style={{ background: s.color }} aria-hidden />
-                <span className="dashboard__stat-label">{s.label}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="dashboard__side">
+            <div className="dashboard__stats">
+              {STATS.map((s, i) => (
+                <div
+                  key={s.label}
+                  className="dashboard__stat"
+                  data-reveal
+                  style={{ '--reveal-delay': `${i * 60}ms` } as React.CSSProperties}
+                >
+                  <span className="dashboard__stat-dot" style={{ background: s.color, boxShadow: `0 0 12px ${s.color}` }} aria-hidden />
+                  <div>
+                    <div className="dashboard__stat-label">{s.label}</div>
+                    <div className="dashboard__stat-desc">{s.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       <style>{`
-        .dashboard__grid {
+        .dashboard__layout {
           display: grid;
-          grid-template-columns: 1.6fr 1fr;
-          gap: var(--sp-7);
-          align-items: center;
+          grid-template-columns: 1.7fr 1fr;
+          gap: var(--sp-8);
+          align-items: start;
+          margin-top: var(--sp-10);
         }
         .dashboard__stats {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: var(--sp-3);
+          position: sticky;
+          top: calc(var(--nav-h) + var(--sp-5));
         }
-        .dashboard__stats li {
+        .dashboard__stat {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           gap: var(--sp-3);
           padding: var(--sp-4);
           border-radius: var(--r-md);
-          background: var(--bg-glass);
+          background: rgba(20, 22, 48, 0.42);
           border: 1px solid var(--line);
           backdrop-filter: blur(8px);
-          transition: transform var(--dur) var(--ease-out), border-color var(--dur);
+          transition: transform 0.4s var(--ease-out), border-color 0.4s, background 0.4s;
         }
-        .dashboard__stats li:hover {
+        .dashboard__stat:hover {
           transform: translateY(-2px);
           border-color: var(--line-strong);
+          background: rgba(20, 22, 48, 0.62);
         }
         .dashboard__stat-dot {
           width: 8px; height: 8px;
           border-radius: 50%;
-          box-shadow: 0 0 12px currentColor;
+          margin-top: 5px;
           flex-shrink: 0;
         }
         .dashboard__stat-label {
           font-family: var(--font-mono);
-          font-size: 0.72rem;
-          letter-spacing: 0.14em;
+          font-size: 0.66rem;
+          letter-spacing: 0.16em;
           color: var(--text-mid);
+          text-transform: uppercase;
+          line-height: 1.2;
+        }
+        .dashboard__stat-desc {
+          margin-top: 6px;
+          font-size: 0.72rem;
+          color: var(--text-lo);
+          line-height: 1.4;
         }
         @media (max-width: 1024px) {
-          .dashboard__grid { grid-template-columns: 1fr; gap: var(--sp-6); }
-          .dashboard__stats { grid-template-columns: 1fr 1fr; }
+          .dashboard__layout { grid-template-columns: 1fr; gap: var(--sp-7); }
+          .dashboard__stats { position: static; grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 560px) {
           .dashboard__stats { grid-template-columns: 1fr; }

@@ -1,5 +1,7 @@
 import { ProceduralCanvas } from '../components/ProceduralCanvas';
+import { SplitText } from '../components/SplitText';
 import { useInView } from '../hooks/useInView';
+import { sectionIndex } from '../data/sections';
 
 const ORBIT_ITEMS = [
   'DASHBOARD', 'USERS', 'SERVERS', 'ENDPOINTS', 'IP SCANNER', 'PORTS',
@@ -16,28 +18,29 @@ export function RevealSection() {
         <ProceduralCanvas variant="reveal" active={inView} />
       </div>
       <div ref={ref} className="container reveal__content">
-        <span className="eyebrow" data-reveal>THE FULL SYSTEM</span>
-        <h2 id="reveal-h" className="h-section" data-reveal style={{ marginTop: 'var(--sp-4)' }}>
-          Everything is connected.
+        <div className="reveal__top" data-reveal="fade">
+          <span className="eyebrow">THE FULL SYSTEM</span>
+          <span className="reveal__index">{sectionIndex('reveal')}</span>
+        </div>
+        <h2 id="reveal-h" className="h-display reveal__headline">
+          <SplitText text={'Everything is\nconnected.'} />
         </h2>
-        <p className="h-sub" data-reveal style={{ marginTop: 'var(--sp-4)', marginInline: 'auto', textAlign: 'center' }}>
+        <p className="h-large reveal__sub" data-reveal style={{ marginTop: 'var(--sp-6)' }}>
           One product. One view. One network.
         </p>
 
-        <ul className="reveal__orbit" aria-hidden>
+        <div className="reveal__modules" aria-hidden>
           {ORBIT_ITEMS.map((item, i) => (
-            <li
+            <span
               key={item}
+              className="reveal__module"
               data-reveal
-              style={{
-                '--reveal-delay': `${i * 50}ms`,
-                '--angle': `${(i / ORBIT_ITEMS.length) * 360}deg`,
-              } as React.CSSProperties}
+              style={{ '--reveal-delay': `${i * 40}ms` } as React.CSSProperties}
             >
-              <span>{item}</span>
-            </li>
+              {item}
+            </span>
           ))}
-        </ul>
+        </div>
       </div>
       <style>{`
         .reveal {
@@ -47,7 +50,7 @@ export function RevealSection() {
           align-items: center;
           overflow: hidden;
         }
-        .reveal__bg { position: absolute; inset: 0; z-index: 0; }
+        .reveal__bg { position: absolute; inset: 0; z-index: 0; opacity: 0.8; }
         .reveal__content {
           position: relative;
           z-index: 1;
@@ -56,41 +59,46 @@ export function RevealSection() {
           align-items: center;
           text-align: center;
         }
-        .reveal__content .h-section { text-align: center; max-width: 18ch; }
-        .reveal__orbit {
-          position: relative;
-          width: min(680px, 80vw);
-          height: min(680px, 80vw);
-          margin-top: var(--sp-7);
-          display: grid;
-          place-items: center;
+        .reveal__top {
+          display: flex;
+          align-items: center;
+          gap: var(--sp-5);
+          margin-bottom: var(--sp-4);
         }
-        .reveal__orbit li {
-          position: absolute;
-          top: 50%; left: 50%;
-          transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-46%) rotate(calc(var(--angle) * -1));
-          padding: 4px 12px;
+        .reveal__index {
           font-family: var(--font-mono);
-          font-size: 0.62rem;
+          font-size: 0.7rem;
+          letter-spacing: 0.2em;
+          color: var(--text-dim);
+        }
+        .reveal__headline { text-align: center; max-width: 18ch; }
+        .reveal__sub { color: var(--text-mid); text-align: center; }
+
+        .reveal__modules {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: var(--sp-2);
+          margin-top: var(--sp-9);
+          max-width: 900px;
+        }
+        .reveal__module {
+          font-family: var(--font-mono);
+          font-size: 0.66rem;
           letter-spacing: 0.18em;
-          color: var(--text-lo);
-          border: 1px solid var(--line);
+          padding: 8px 14px;
           border-radius: var(--r-pill);
-          background: rgba(7, 8, 21, 0.7);
-          backdrop-filter: blur(6px);
-          white-space: nowrap;
-          animation: reveal-orbit 30s linear infinite;
+          background: rgba(6, 7, 19, 0.7);
+          border: 1px solid var(--line);
+          color: var(--text-lo);
+          backdrop-filter: blur(8px);
+          transition: all 0.4s var(--ease-out);
         }
-        @keyframes reveal-orbit {
-          from { transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-46%) rotate(calc(var(--angle) * -1)); }
-          to   { transform: translate(-50%, -50%) rotate(calc(var(--angle) + 360deg)) translateY(-46%) rotate(calc((var(--angle) + 360deg) * -1)); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .reveal__orbit li { animation: none; }
-        }
-        @media (max-width: 768px) {
-          .reveal__orbit { width: 90vw; height: 90vw; }
-          .reveal__orbit li { font-size: 0.55rem; padding: 3px 8px; }
+        .reveal__module:hover {
+          background: rgba(168, 85, 247, 0.12);
+          border-color: var(--accent);
+          color: var(--text-hi);
+          transform: translateY(-2px);
         }
       `}</style>
     </section>

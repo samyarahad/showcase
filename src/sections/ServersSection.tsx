@@ -5,11 +5,12 @@ export function ServersSection() {
     <ScreenshotSection
       id="servers"
       eyebrow="SERVERS"
-      headline="Your infrastructure, in view."
+      headline="Your infrastructure,\nin view."
       subline="Register servers, assign endpoints, and watch them come alive."
       screenshot="./screenshot-servers.png"
       alt="Pixel & Ping — Servers registration screen"
-      caption="Pixel & Ping · Servers"
+      url="app.pixel-ping.io/servers"
+      caption="Servers · Inventory & assignment"
       flip="left"
       features={[
         { title: 'One place for every server', desc: 'A single inventory of every machine under your network — registered, named, and ready.' },

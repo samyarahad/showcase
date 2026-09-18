@@ -5,11 +5,11 @@ export function CloudflareSection() {
     <ProceduralSection
       id="cloudflare"
       eyebrow="CLOUDFLARE"
-      headline="Built around modern infrastructure."
+      headline="Built around modern\ninfrastructure."
       subline="Designed around Cloudflare integration for routing and resilience."
       variant="cloud"
       flip="left"
-      chips={['CF', 'WORKER', 'TLS', 'SNICFRONT']}
+      chips={['CF', 'WORKER', 'TLS', 'SNI']}
       features={[
         { title: 'Designed around Cloudflare infrastructure', desc: 'Cloudflare integration is part of how Pixel & Ping routes traffic — not an afterthought.' },
         { title: 'No endorsement implied', desc: 'Pixel & Ping uses Cloudflare as a tool. This is a visual explanation, not a partnership claim.' },

@@ -5,7 +5,7 @@ export function FailoverSection() {
     <ProceduralSection
       id="failover"
       eyebrow="FAILOVER"
-      headline="Built for changing paths."
+      headline="Built for\nchanging paths."
       subline="Primary, alternate, connected — resilience as a story."
       variant="failover"
       flip="left"

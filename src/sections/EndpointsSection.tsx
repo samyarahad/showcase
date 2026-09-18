@@ -5,7 +5,7 @@ export function EndpointsSection() {
     <ProceduralSection
       id="endpoints"
       eyebrow="ENDPOINTS"
-      headline="Every endpoint has a place."
+      headline="Every endpoint\nhas a place."
       subline="Connections converge into a clear, organized map."
       variant="network"
       flip="left"

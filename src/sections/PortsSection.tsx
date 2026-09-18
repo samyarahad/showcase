@@ -5,7 +5,7 @@ export function PortsSection() {
     <ProceduralSection
       id="ports"
       eyebrow="PORTS"
-      headline="Every connection, organized."
+      headline="Every connection,\norganized."
       subline="A clear technical visualization of how every path is routed."
       variant="grid-scan"
       flip="right"

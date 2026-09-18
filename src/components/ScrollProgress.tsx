@@ -1,21 +1,28 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
- * Subtle scroll progress indicator — a thin gradient line at the top of the
- * viewport whose width tracks the global scroll position.
+ * Premium scroll indicator: thin gradient line at the very top + a small
+ * percentage counter fixed to the bottom-right that fades in/out.
  */
 export function ScrollProgress() {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const lineRef = useRef<HTMLDivElement | null>(null);
+  const counterRef = useRef<HTMLDivElement | null>(null);
+  const [pct, setPct] = useState(0);
 
   useEffect(() => {
     let raf = 0;
     const update = () => {
-      const el = ref.current;
-      if (!el) return;
       const doc = document.documentElement;
       const max = doc.scrollHeight - window.innerHeight;
-      const pct = max > 0 ? window.scrollY / max : 0;
-      el.style.transform = `scaleX(${pct})`;
+      const p = max > 0 ? window.scrollY / max : 0;
+      const pctVal = Math.round(p * 100);
+      if (lineRef.current) {
+        lineRef.current.style.transform = `scaleX(${p})`;
+      }
+      if (counterRef.current) {
+        counterRef.current.style.opacity = p > 0.02 && p < 0.98 ? '1' : '0';
+      }
+      setPct(pctVal);
       raf = 0;
     };
     const onScroll = () => {
@@ -32,30 +39,46 @@ export function ScrollProgress() {
   }, []);
 
   return (
-    <div
-      aria-hidden
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '2px',
-        zIndex: 200,
-        pointerEvents: 'none',
-        background: 'transparent',
-      }}
-    >
+    <>
+      <div aria-hidden style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '2px', zIndex: 200, pointerEvents: 'none' }}>
+        <div
+          ref={lineRef}
+          style={{
+            height: '100%',
+            width: '100%',
+            transformOrigin: 'left center',
+            transform: 'scaleX(0)',
+            background: 'linear-gradient(90deg, #6366f1, #a855f7, #d946ef)',
+            boxShadow: '0 0 6px rgba(168, 85, 247, 0.6)',
+          }}
+        />
+      </div>
+
       <div
-        ref={ref}
+        ref={counterRef}
+        aria-hidden
         style={{
-          height: '100%',
-          width: '100%',
-          transformOrigin: 'left center',
-          transform: 'scaleX(0)',
-          background: 'linear-gradient(90deg, #6366f1, #a855f7, #d946ef)',
-          boxShadow: '0 0 8px rgba(168, 85, 247, 0.55)',
+          position: 'fixed',
+          bottom: '24px',
+          right: '32px',
+          zIndex: 90,
+          fontFamily: 'var(--font-mono)',
+          fontSize: '0.68rem',
+          letterSpacing: '0.18em',
+          color: 'var(--text-lo)',
+          background: 'rgba(6, 7, 19, 0.7)',
+          backdropFilter: 'blur(8px)',
+          padding: '6px 12px',
+          borderRadius: 'var(--r-pill)',
+          border: '1px solid var(--line)',
+          opacity: 0,
+          transition: 'opacity 0.4s var(--ease-out)',
+          fontVariantNumeric: 'tabular-nums',
+          pointerEvents: 'none',
         }}
-      />
-    </div>
+      >
+        {String(pct).padStart(3, '0')} <span style={{ color: 'var(--accent)' }}>/</span> 100
+      </div>
+    </>
   );
 }

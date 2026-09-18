@@ -5,11 +5,12 @@ export function IPScannerSection() {
     <ScreenshotSection
       id="ip-scanner"
       eyebrow="IP SCANNER"
-      headline="Find the signal."
+      headline="Find the\nsignal."
       subline="Explore network intelligence through a focused interface."
       screenshot="./screenshot-ip-scanner.png"
       alt="Pixel & Ping — IP Scanner screen with clean IP pool and endpoint health"
-      caption="Pixel & Ping · IP Scanner"
+      url="app.pixel-ping.io/ip-scanner"
+      caption="IP Scanner · Clean pool & health"
       flip="right"
       features={[
         { title: 'Clean IP pool', desc: 'A curated list of addresses to use when generating configs — kept separate from your live inventory.' },

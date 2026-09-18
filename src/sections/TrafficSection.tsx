@@ -5,7 +5,7 @@ export function TrafficSection() {
     <ProceduralSection
       id="traffic"
       eyebrow="TRAFFIC"
-      headline="Watch the network move."
+      headline="Watch the\nnetwork move."
       subline="Thousands of subtle paths visualize the flow of data."
       variant="traffic"
       flip="left"
