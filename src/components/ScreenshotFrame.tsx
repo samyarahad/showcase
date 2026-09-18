@@ -192,8 +192,8 @@ export function ScreenshotFrame({
           position: relative;
           width: 100%;
           border-radius: var(--r-xl);
-          background: linear-gradient(180deg, #16182d 0%, #0c0e1f 100%);
-          border: 1px solid rgba(168, 85, 247, 0.18);
+          background: linear-gradient(180deg, #161a21 0%, #0c0e12 100%);
+          border: 1px solid rgba(70, 183, 255, 0.18);
           overflow: hidden;
           transform-style: preserve-3d;
           transform:
@@ -207,7 +207,7 @@ export function ScreenshotFrame({
           z-index: 2;
         }
         .shot__frame:hover {
-          border-color: rgba(168, 85, 247, 0.35);
+          border-color: rgba(70, 183, 255, 0.35);
         }
 
         .shot__chrome {
@@ -215,8 +215,8 @@ export function ScreenshotFrame({
           align-items: center;
           gap: var(--sp-4);
           padding: 12px 18px;
-          border-bottom: 1px solid rgba(124, 134, 178, 0.10);
-          background: linear-gradient(180deg, rgba(28, 30, 60, 0.55), rgba(15, 16, 36, 0.55));
+          border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+          background: linear-gradient(180deg, rgba(22, 26, 33, 0.55), rgba(11, 13, 16, 0.55));
         }
         .shot__lights {
           display: flex;
@@ -239,7 +239,7 @@ export function ScreenshotFrame({
           padding: 5px 14px;
           border-radius: var(--r-pill);
           background: rgba(0, 0, 0, 0.35);
-          border: 1px solid rgba(124, 134, 178, 0.10);
+          border: 1px solid rgba(255, 255, 255, 0.07);
           font-family: var(--font-mono);
           font-size: 0.72rem;
           color: var(--text-lo);
@@ -257,13 +257,13 @@ export function ScreenshotFrame({
           width: 14px;
           height: 14px;
           border-radius: 4px;
-          background: rgba(124, 134, 178, 0.18);
+          background: rgba(255, 255, 255, 0.11);
         }
 
         .shot__media {
           position: relative;
           overflow: hidden;
-          background: #0a0b1a;
+          background: #0b0d10;
         }
         .shot__media img {
           width: 100%;
@@ -277,7 +277,7 @@ export function ScreenshotFrame({
           pointer-events: none;
           background: radial-gradient(
             circle 220px at var(--gx, 50%) var(--gy, 50%),
-            rgba(168, 85, 247, 0.18),
+            rgba(70, 183, 255, 0.18),
             transparent 70%
           );
           opacity: 0;
@@ -292,7 +292,7 @@ export function ScreenshotFrame({
           display: flex;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(180deg, #11132a, #0a0b1a);
+          background: linear-gradient(180deg, #111318, #0b0d10);
           transition: opacity 0.4s var(--ease-out);
           z-index: 0;
         }
@@ -311,7 +311,7 @@ export function ScreenshotFrame({
         .shot__shadow {
           position: absolute;
           inset: 5% 5% -20% 5%;
-          background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.22), transparent 70%);
+          background: radial-gradient(ellipse at center, rgba(46, 125, 255, 0.22), transparent 70%);
           filter: blur(40px);
           z-index: 0;
           pointer-events: none;

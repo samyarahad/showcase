@@ -88,14 +88,14 @@ export function RevealSection() {
           letter-spacing: 0.18em;
           padding: 8px 14px;
           border-radius: var(--r-pill);
-          background: rgba(6, 7, 19, 0.7);
+          background: rgba(7, 8, 10, 0.7);
           border: 1px solid var(--line);
           color: var(--text-lo);
           backdrop-filter: blur(8px);
           transition: all 0.4s var(--ease-out);
         }
         .reveal__module:hover {
-          background: rgba(168, 85, 247, 0.12);
+          background: rgba(70, 183, 255, 0.12);
           border-color: var(--accent);
           color: var(--text-hi);
           transform: translateY(-2px);

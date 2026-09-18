@@ -15,7 +15,9 @@ interface Props {
  * inner `<span>` that translates up from below.
  */
 export function SplitText({ text, splitBy = '\n', className, as = 'span' }: Props) {
-  const lines = useMemo(() => text.split(splitBy), [text, splitBy]);
+  // Normalize literal "\n" sequences (JSX attribute strings do not process
+  // escape sequences) into real newlines before splitting.
+  const lines = useMemo(() => text.replace(/\\n/g, '\n').split(splitBy), [text, splitBy]);
   const Tag = as as any;
 
   return (

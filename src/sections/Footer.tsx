@@ -70,7 +70,7 @@ export function Footer() {
           position: relative;
           padding-top: var(--sp-10);
           border-top: 1px solid var(--line);
-          background: linear-gradient(180deg, transparent, rgba(6, 7, 19, 0.6));
+          background: linear-gradient(180deg, transparent, rgba(7, 8, 10, 0.6));
         }
         .footer__top {
           display: flex;
@@ -82,7 +82,7 @@ export function Footer() {
         }
         .footer__brand { display: flex; align-items: center; gap: var(--sp-4); }
         .footer__logo {
-          filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.4));
+          filter: hue-rotate(-62deg) saturate(1.15) drop-shadow(0 0 16px rgba(70, 183, 255, 0.4));
         }
         .footer__name {
           font-weight: 700;
@@ -115,7 +115,7 @@ export function Footer() {
         .footer__social a:hover {
           color: var(--text-hi);
           border-color: var(--accent);
-          background: rgba(168, 85, 247, 0.08);
+          background: rgba(70, 183, 255, 0.08);
           transform: translateY(-2px);
         }
         .footer__social a svg:last-child {

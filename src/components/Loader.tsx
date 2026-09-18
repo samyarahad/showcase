@@ -101,7 +101,7 @@ export function Loader({ onComplete }: { onComplete: () => void }) {
           gap: var(--sp-4);
         }
         .loader__logo {
-          filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.5));
+          filter: hue-rotate(-62deg) saturate(1.15) drop-shadow(0 0 16px rgba(70, 183, 255, 0.5));
           animation: loader-logo-pulse 2s ease-in-out infinite;
         }
         .loader__brand-text { display: flex; flex-direction: column; gap: 2px; }
@@ -149,7 +149,7 @@ export function Loader({ onComplete }: { onComplete: () => void }) {
           width: 100%;
           transform-origin: left center;
           background: var(--grad-brand);
-          box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+          box-shadow: 0 0 8px rgba(70, 183, 255, 0.6);
         }
 
         .loader__hint {

@@ -65,7 +65,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
           vx: (Math.random() - 0.5) * 0.3,
           vy: (Math.random() - 0.5) * 0.3,
           r: Math.random() * 1.6 + 0.5,
-          hue: 245 + Math.random() * 40,
+          hue: 200 + Math.random() * 32,
           phase: Math.random() * Math.PI * 2,
         }));
       } else if (variant === 'traffic') {
@@ -76,7 +76,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
           vx: 0.3 + Math.random() * 1.2,
           vy: (Math.random() - 0.5) * 0.15,
           r: Math.random() * 1.3 + 0.3,
-          hue: 220 + Math.random() * 60,
+          hue: 195 + Math.random() * 37,
           phase: Math.random() * Math.PI * 2,
         }));
       } else if (variant === 'reveal') {
@@ -92,7 +92,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
             vx: 0,
             vy: 0,
             r: 1 + Math.random() * 1.8,
-            hue: 240 + Math.random() * 50,
+            hue: 200 + Math.random() * 30,
             phase: 0,
           };
         });
@@ -138,7 +138,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
 
     function drawGridScan(alpha: number) {
       const grid = 36;
-      ctx!.strokeStyle = `rgba(99, 102, 241, ${0.06 * alpha})`;
+      ctx!.strokeStyle = `rgba(46, 125, 255, ${0.06 * alpha})`;
       ctx!.lineWidth = 1;
       for (let x = 0; x <= w; x += grid) {
         ctx!.beginPath();
@@ -154,9 +154,9 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
       }
       const scanX = (t * 50) % (w + 200) - 100;
       const grad = ctx!.createLinearGradient(scanX - 80, 0, scanX + 80, 0);
-      grad.addColorStop(0, 'rgba(168, 85, 247, 0)');
-      grad.addColorStop(0.5, `rgba(168, 85, 247, ${0.25 * alpha})`);
-      grad.addColorStop(1, 'rgba(168, 85, 247, 0)');
+      grad.addColorStop(0, 'rgba(70, 183, 255, 0)');
+      grad.addColorStop(0.5, `rgba(70, 183, 255, ${0.25 * alpha})`);
+      grad.addColorStop(1, 'rgba(70, 183, 255, 0)');
       ctx!.fillStyle = grad;
       ctx!.fillRect(scanX - 80, 0, 160, h);
       const nodeCount = reducedMotion ? 6 : 14;
@@ -164,7 +164,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
         const px = (i * 137) % w;
         const py = (i * 79) % h;
         const pulse = (Math.sin(t * 1.4 + i * 0.7) + 1) * 0.5;
-        ctx!.fillStyle = `rgba(168, 85, 247, ${(0.4 + pulse * 0.5) * alpha})`;
+        ctx!.fillStyle = `rgba(70, 183, 255, ${(0.4 + pulse * 0.5) * alpha})`;
         ctx!.beginPath();
         ctx!.arc(px, py, 2.4, 0, Math.PI * 2);
         ctx!.fill();
@@ -180,15 +180,15 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
         const x = cx + Math.cos(ang) * r * 1.5;
         const y = cy + Math.sin(ang) * r * 0.9;
         const grad = ctx!.createRadialGradient(x, y, 0, x, y, 120);
-        grad.addColorStop(0, `rgba(168, 85, 247, ${0.18 * alpha})`);
-        grad.addColorStop(0.5, `rgba(99, 102, 241, ${0.08 * alpha})`);
-        grad.addColorStop(1, 'rgba(99, 102, 241, 0)');
+        grad.addColorStop(0, `rgba(70, 183, 255, ${0.18 * alpha})`);
+        grad.addColorStop(0.5, `rgba(46, 125, 255, ${0.08 * alpha})`);
+        grad.addColorStop(1, 'rgba(46, 125, 255, 0)');
         ctx!.fillStyle = grad;
         ctx!.beginPath();
         ctx!.arc(x, y, 120, 0, Math.PI * 2);
         ctx!.fill();
       }
-      ctx!.strokeStyle = `rgba(168, 85, 247, ${0.28 * alpha})`;
+      ctx!.strokeStyle = `rgba(70, 183, 255, ${0.28 * alpha})`;
       ctx!.lineWidth = 0.8;
       for (let i = 0; i < 8; i++) {
         ctx!.beginPath();
@@ -203,9 +203,9 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
       const cy = h / 2;
       const r = 50 + Math.sin(t * 0.8) * 4;
       const grad = ctx!.createRadialGradient(cx, cy, 0, cx, cy, r * 2);
-      grad.addColorStop(0, `rgba(168, 85, 247, ${0.55 * alpha})`);
-      grad.addColorStop(0.5, `rgba(99, 102, 241, ${0.25 * alpha})`);
-      grad.addColorStop(1, 'rgba(99, 102, 241, 0)');
+      grad.addColorStop(0, `rgba(70, 183, 255, ${0.55 * alpha})`);
+      grad.addColorStop(0.5, `rgba(46, 125, 255, ${0.25 * alpha})`);
+      grad.addColorStop(1, 'rgba(46, 125, 255, 0)');
       ctx!.fillStyle = grad;
       ctx!.beginPath();
       ctx!.arc(cx, cy, r * 2, 0, Math.PI * 2);
@@ -217,7 +217,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
         const px = cx + Math.cos(ang) * dist;
         const py = cy + Math.sin(ang) * dist;
         const flow = (t * 0.5 + i * 0.3) % 1;
-        ctx!.strokeStyle = `rgba(168, 85, 247, ${0.18 * alpha})`;
+        ctx!.strokeStyle = `rgba(70, 183, 255, ${0.18 * alpha})`;
         ctx!.lineWidth = 0.8;
         ctx!.beginPath();
         ctx!.moveTo(px, py);
@@ -225,7 +225,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
         ctx!.stroke();
         const dx = px + (cx - px) * flow;
         const dy = py + (cy - py) * flow;
-        ctx!.fillStyle = `rgba(217, 70, 239, ${0.85 * alpha})`;
+        ctx!.fillStyle = `rgba(139, 243, 230, ${0.85 * alpha})`;
         ctx!.beginPath();
         ctx!.arc(dx, dy, 2, 0, Math.PI * 2);
         ctx!.fill();
@@ -253,7 +253,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
       const pad = 24;
       const cw = w - pad * 2;
       const ch = h - pad * 2;
-      ctx!.strokeStyle = `rgba(124, 134, 178, ${0.10 * alpha})`;
+      ctx!.strokeStyle = `rgba(255, 255, 255, ${0.08 * alpha})`;
       ctx!.lineWidth = 1;
       for (let i = 0; i <= 4; i++) {
         const y = pad + (i / 4) * ch;
@@ -263,7 +263,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
         ctx!.stroke();
       }
       for (let l = 0; l < 3; l++) {
-        const hue = 245 + l * 15;
+        const hue = 200 + l * 18;
         ctx!.strokeStyle = `hsla(${hue}, 85%, 68%, ${0.7 * alpha})`;
         ctx!.lineWidth = 1.6;
         ctx!.beginPath();
@@ -283,13 +283,13 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
       const pad = 32;
       const cy = h / 2;
       const phase = (Math.sin(t * 0.6) + 1) / 2;
-      ctx!.strokeStyle = `rgba(99, 102, 241, ${(0.3 + (1 - phase) * 0.5) * alpha})`;
+      ctx!.strokeStyle = `rgba(46, 125, 255, ${(0.3 + (1 - phase) * 0.5) * alpha})`;
       ctx!.lineWidth = 2.4;
       ctx!.beginPath();
       ctx!.moveTo(pad, cy - 30);
       ctx!.lineTo(w - pad, cy - 30);
       ctx!.stroke();
-      ctx!.strokeStyle = `rgba(217, 70, 239, ${(0.3 + phase * 0.6) * alpha})`;
+      ctx!.strokeStyle = `rgba(139, 243, 230, ${(0.3 + phase * 0.6) * alpha})`;
       ctx!.lineWidth = 2.4;
       ctx!.setLineDash([6, 6]);
       ctx!.beginPath();
@@ -306,7 +306,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
         }
       }
       ctx!.font = '500 11px "JetBrains Mono", monospace';
-      ctx!.fillStyle = `rgba(168, 85, 247, ${0.7 * alpha})`;
+      ctx!.fillStyle = `rgba(70, 183, 255, ${0.7 * alpha})`;
       ctx!.textAlign = 'center';
       ctx!.fillText(phase > 0.5 ? 'CONNECTED · ALTERNATE' : 'PRIMARY ROUTE', w / 2, 24);
     }
@@ -325,9 +325,9 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
         const levels = ['INFO', 'OK', 'WARN', 'INFO', 'OK'];
         const lvl = levels[i % levels.length];
         const lvlColors: Record<string, string> = {
-          INFO: `rgba(99, 102, 241, ${opacity})`,
-          OK: `rgba(45, 212, 191, ${opacity})`,
-          WARN: `rgba(245, 158, 11, ${opacity})`,
+          INFO: `rgba(46, 125, 255, ${opacity})`,
+          OK: `rgba(139, 243, 230, ${opacity})`,
+          WARN: `rgba(255, 180, 84, ${opacity})`,
         };
         ctx!.fillStyle = lvlColors[lvl];
         ctx!.fillText(lvl.padEnd(5, ' '), 100, y + shift);
@@ -344,7 +344,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
         const phase = (t * 0.5 + i * 0.4) % 1;
         const r = 30 + phase * 200;
         const a = (1 - phase) * 0.6 * alpha;
-        ctx!.strokeStyle = `rgba(168, 85, 247, ${a})`;
+        ctx!.strokeStyle = `rgba(70, 183, 255, ${a})`;
         ctx!.lineWidth = 1.5;
         ctx!.beginPath();
         ctx!.arc(cx, cy, r, 0, Math.PI * 2);
@@ -355,8 +355,8 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
       ctx!.arc(cx, cy, 6, 0, Math.PI * 2);
       ctx!.fill();
       const grad = ctx!.createRadialGradient(cx, cy, 0, cx, cy, 60);
-      grad.addColorStop(0, `rgba(168, 85, 247, ${0.4 * alpha})`);
-      grad.addColorStop(1, 'rgba(168, 85, 247, 0)');
+      grad.addColorStop(0, `rgba(70, 183, 255, ${0.4 * alpha})`);
+      grad.addColorStop(1, 'rgba(70, 183, 255, 0)');
       ctx!.fillStyle = grad;
       ctx!.beginPath();
       ctx!.arc(cx, cy, 60, 0, Math.PI * 2);
@@ -368,7 +368,7 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
       const cy = h / 2;
       for (const p of particles) {
         const pulse = (Math.sin(t * 0.8 + p.x * 0.01) + 1) * 0.5;
-        ctx!.strokeStyle = `rgba(168, 85, 247, ${(0.18 + pulse * 0.18) * alpha})`;
+        ctx!.strokeStyle = `rgba(70, 183, 255, ${(0.18 + pulse * 0.18) * alpha})`;
         ctx!.lineWidth = 0.6;
         ctx!.beginPath();
         ctx!.moveTo(p.x, p.y);
@@ -388,9 +388,9 @@ export function ProceduralCanvas({ variant, active = true, className }: Props) {
       const r = 24 + Math.sin(t * 1.2) * 4;
       const grad = ctx!.createRadialGradient(cx, cy, 0, cx, cy, r * 3);
       grad.addColorStop(0, `rgba(255, 255, 255, ${0.9 * alpha})`);
-      grad.addColorStop(0.2, `rgba(168, 85, 247, ${0.7 * alpha})`);
-      grad.addColorStop(0.6, `rgba(99, 102, 241, ${0.25 * alpha})`);
-      grad.addColorStop(1, 'rgba(99, 102, 241, 0)');
+      grad.addColorStop(0.2, `rgba(70, 183, 255, ${0.7 * alpha})`);
+      grad.addColorStop(0.6, `rgba(46, 125, 255, ${0.25 * alpha})`);
+      grad.addColorStop(1, 'rgba(46, 125, 255, 0)');
       ctx!.fillStyle = grad;
       ctx!.beginPath();
       ctx!.arc(cx, cy, r * 3, 0, Math.PI * 2);

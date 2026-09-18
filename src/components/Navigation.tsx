@@ -4,7 +4,6 @@ import { useMagnetic } from '../hooks/useMagnetic';
 
 export function Navigation() {
   const navRef = useRef<HTMLElement | null>(null);
-  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [time, setTime] = useState('');
   const brandRef = useMagnetic<HTMLAnchorElement>(0.2);
@@ -76,17 +75,17 @@ export function Navigation() {
   return (
     <>
       <nav ref={navRef} className="nav" aria-label="Primary">
-        <div className="nav__inner">
+        <div className="nav__pill">
           <a ref={brandRef} href="#hero" className="nav__brand" aria-label="Pixel & Ping — Home">
             <span className="nav__logo" aria-hidden>
-              <svg viewBox="0 0 32 32" width="32" height="32">
+              <svg viewBox="0 0 32 32" width="30" height="30">
                 <defs>
                   <linearGradient id="navLogo" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#6366f1" />
-                    <stop offset="100%" stopColor="#a855f7" />
+                    <stop offset="0%" stopColor="#2e7dff" />
+                    <stop offset="100%" stopColor="#8bf3e6" />
                   </linearGradient>
                 </defs>
-                <rect width="32" height="32" rx="8" fill="#0a0b1a" stroke="rgba(168,85,247,0.3)" />
+                <rect width="32" height="32" rx="9" fill="#0b0d10" stroke="rgba(70,183,255,0.3)" />
                 <path
                   d="M11 7h7a6 6 0 0 1 0 12h-4v6h-3V7zm3 3v6h4a3 3 0 0 0 0-6h-4z"
                   fill="url(#navLogo)"
@@ -94,15 +93,14 @@ export function Navigation() {
               </svg>
             </span>
             <span className="nav__brand-text">
-              <span className="nav__brand-name">PIXEL <span className="text-accent">&amp;</span> PING</span>
+              <span className="nav__brand-name">PIXEL <span className="nav__amp">&amp;</span> PING</span>
               <span className="nav__brand-tag">v1.1.1 · showcase</span>
             </span>
           </a>
 
           <ul className="nav__items">
-            {NAV_ITEMS.map((item, i) => (
+            {NAV_ITEMS.map((item) => (
               <li key={item.id}>
-                <span className="nav__index">{String(i + 1).padStart(2, '0')}</span>
                 <a href={`#${item.id}`} data-nav-item={item.id} className="nav__item">
                   {item.label}
                 </a>
@@ -112,6 +110,12 @@ export function Navigation() {
 
           <div className="nav__meta">
             <span className="nav__time">{time}</span>
+            <a href="#final" className="nav__cta">
+              Experience
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
             <button
               className="nav__burger"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -125,7 +129,7 @@ export function Navigation() {
         </div>
       </nav>
 
-      <div ref={mobileMenuRef} className={`nav-mobile ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
+      <div className={`nav-mobile ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
         <ul>
           {NAV_ITEMS.map((item, i) => (
             <li key={item.id}>
@@ -146,42 +150,60 @@ export function Navigation() {
           position: fixed;
           top: 0; left: 0; right: 0;
           z-index: 100;
-          transition: transform 0.6s var(--ease-out), background 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+          padding-top: 14px;
+          transition: transform 0.6s var(--ease-out);
           transform: translateY(0);
-          border-bottom: 1px solid transparent;
         }
-        .nav.is-scrolled {
-          background: rgba(6, 7, 19, 0.65);
-          backdrop-filter: blur(24px) saturate(160%);
-          -webkit-backdrop-filter: blur(24px) saturate(160%);
-          border-bottom-color: var(--line);
-        }
-        .nav.is-hidden { transform: translateY(-110%); }
+        .nav.is-hidden { transform: translateY(-130%); }
 
-        .nav__inner {
+        /* Scrolltide-style floating pill container */
+        .nav__pill {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          height: var(--nav-h);
-          padding-inline: clamp(1.5rem, 4vw, 3rem);
-          gap: var(--sp-5);
+          gap: var(--sp-4);
+          height: 60px;
+          margin-inline: auto;
+          max-width: var(--container-wide);
+          width: calc(100% - clamp(1.5rem, 4vw, 3rem) * 2);
+          padding-inline: var(--sp-3) var(--sp-3);
+          border-radius: var(--r-pill);
+          border: 1px solid var(--line);
+          background: rgba(7, 8, 10, 0.55);
+          backdrop-filter: blur(20px) saturate(160%);
+          -webkit-backdrop-filter: blur(20px) saturate(160%);
+          box-shadow: 0 12px 40px -16px rgba(0, 0, 0, 0.6);
+          transition: background 0.5s var(--ease-out), border-color 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+        }
+        .nav.is-scrolled .nav__pill {
+          background: rgba(7, 8, 10, 0.78);
+          border-color: var(--line-strong);
+          box-shadow: 0 18px 60px -18px rgba(0, 0, 0, 0.75), 0 8px 40px -20px rgba(70, 183, 255, 0.25);
         }
 
-        .nav__brand { display: inline-flex; align-items: center; gap: var(--sp-3); }
+        .nav__brand { display: inline-flex; align-items: center; gap: var(--sp-3); padding-inline: var(--sp-2); }
         .nav__logo {
           display: inline-flex;
-          filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.35));
+          filter: drop-shadow(0 0 12px rgba(70, 183, 255, 0.35));
         }
         .nav__brand-text { display: flex; flex-direction: column; line-height: 1.1; }
         .nav__brand-name {
           font-weight: 700;
-          font-size: 0.92rem;
-          letter-spacing: 0.04em;
+          font-size: 0.88rem;
+          letter-spacing: 0.05em;
           color: var(--text-hi);
+          white-space: nowrap;
+        }
+        .nav__amp {
+          background: var(--grad-brand);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
         }
         .nav__brand-tag {
           font-family: var(--font-mono);
-          font-size: 0.6rem;
+          font-size: 0.56rem;
           color: var(--text-lo);
           letter-spacing: 0.16em;
           margin-top: 2px;
@@ -190,49 +212,53 @@ export function Navigation() {
         .nav__items {
           display: flex;
           align-items: center;
-          gap: 0;
-        }
-        .nav__items li {
-          display: flex;
-          align-items: center;
-          gap: var(--sp-2);
-          padding-inline: var(--sp-4);
-        }
-        .nav__index {
-          font-family: var(--font-mono);
-          font-size: 0.58rem;
-          color: var(--text-dim);
-          letter-spacing: 0.1em;
+          gap: 2px;
         }
         .nav__item {
-          position: relative;
-          padding: 0.4rem 0;
-          font-size: 0.74rem;
+          display: inline-block;
+          padding: 0.44rem 0.85rem;
+          border-radius: var(--r-pill);
+          font-size: 0.7rem;
           font-weight: 500;
-          letter-spacing: 0.22em;
+          letter-spacing: 0.18em;
           color: var(--text-mid);
-          transition: color 0.4s var(--ease-out);
+          transition: color 0.4s var(--ease-out), background 0.4s var(--ease-out);
         }
-        .nav__item:hover { color: var(--text-hi); }
-        .nav__item.is-active { color: var(--text-hi); }
-        .nav__item.is-active::after {
-          content: '';
-          position: absolute;
-          left: 0; right: 0;
-          bottom: -4px;
-          height: 1px;
-          background: var(--grad-brand);
-          box-shadow: 0 0 6px rgba(168, 85, 247, 0.7);
+        .nav__item:hover { color: var(--text-hi); background: rgba(255, 255, 255, 0.05); }
+        .nav__item.is-active {
+          color: var(--text-hi);
+          background: rgba(70, 183, 255, 0.12);
+          box-shadow: inset 0 0 0 1px rgba(70, 183, 255, 0.22);
         }
 
-        .nav__meta { display: flex; align-items: center; gap: var(--sp-4); }
+        .nav__meta { display: flex; align-items: center; gap: var(--sp-3); }
         .nav__time {
           font-family: var(--font-mono);
-          font-size: 0.7rem;
-          letter-spacing: 0.18em;
+          font-size: 0.66rem;
+          letter-spacing: 0.14em;
           color: var(--text-lo);
           font-variant-numeric: tabular-nums;
         }
+        .nav__cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 0.5rem 1rem;
+          border-radius: var(--r-pill);
+          font-size: 0.72rem;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          color: #04121f;
+          background: var(--grad-brand);
+          box-shadow: 0 6px 24px -8px rgba(70, 183, 255, 0.55);
+          transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+        }
+        .nav__cta:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 14px 40px -12px rgba(70, 183, 255, 0.7);
+        }
+        .nav__cta svg { transition: transform 0.5s var(--ease-out); }
+        .nav__cta:hover svg { transform: translateX(2px); }
 
         .nav__burger {
           display: none;
@@ -261,12 +287,9 @@ export function Navigation() {
 
         .nav-mobile {
           position: fixed;
-          top: var(--nav-h); left: 0; right: 0;
+          top: 84px; left: 0; right: 0;
           z-index: 99;
-          background: rgba(6, 7, 19, 0.96);
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
-          border-bottom: 1px solid var(--line);
+          padding-inline: clamp(1rem, 3vw, 2rem);
           clip-path: inset(0 0 100% 0);
           transition: clip-path 0.5s var(--ease-out);
           pointer-events: none;
@@ -278,16 +301,22 @@ export function Navigation() {
         .nav-mobile ul {
           display: flex;
           flex-direction: column;
-          padding: var(--sp-4) clamp(1.5rem, 4vw, 3rem);
-          gap: var(--sp-1);
+          padding: var(--sp-3);
+          gap: 2px;
+          border-radius: var(--r-xl);
+          border: 1px solid var(--line);
+          background: rgba(7, 8, 10, 0.92);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8);
         }
         .nav-mobile a {
           display: flex;
           align-items: center;
           gap: var(--sp-4);
           padding: var(--sp-4) var(--sp-3);
-          font-size: 0.95rem;
-          letter-spacing: 0.22em;
+          font-size: 0.9rem;
+          letter-spacing: 0.2em;
           font-weight: 500;
           color: var(--text-mid);
           border-radius: var(--r-md);
@@ -301,9 +330,12 @@ export function Navigation() {
           letter-spacing: 0.1em;
         }
 
+        @media (max-width: 1120px) {
+          .nav__time { display: none; }
+        }
         @media (max-width: 980px) {
           .nav__items { display: none; }
-          .nav__time { display: none; }
+          .nav__cta { display: none; }
           .nav__burger { display: flex; }
         }
       `}</style>

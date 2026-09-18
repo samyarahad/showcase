@@ -48,8 +48,8 @@ export function ScrollProgress() {
             width: '100%',
             transformOrigin: 'left center',
             transform: 'scaleX(0)',
-            background: 'linear-gradient(90deg, #6366f1, #a855f7, #d946ef)',
-            boxShadow: '0 0 6px rgba(168, 85, 247, 0.6)',
+            background: 'linear-gradient(90deg, #2e7dff, #46b7ff, #8bf3e6)',
+            boxShadow: '0 0 6px rgba(70, 183, 255, 0.6)',
           }}
         />
       </div>
@@ -66,7 +66,7 @@ export function ScrollProgress() {
           fontSize: '0.68rem',
           letterSpacing: '0.18em',
           color: 'var(--text-lo)',
-          background: 'rgba(6, 7, 19, 0.7)',
+          background: 'rgba(7, 8, 10, 0.7)',
           backdropFilter: 'blur(8px)',
           padding: '6px 12px',
           borderRadius: 'var(--r-pill)',

@@ -6,6 +6,7 @@ import { Navigation } from './components/Navigation';
 import { ScrollProgress } from './components/ScrollProgress';
 import { CustomCursor } from './components/CustomCursor';
 import { Loader } from './components/Loader';
+import { MarqueeBand } from './components/MarqueeBand';
 import { HeroSection } from './sections/HeroSection';
 import { NetworkSection } from './sections/NetworkSection';
 import { EmergeSection } from './sections/EmergeSection';
@@ -106,6 +107,7 @@ export default function App() {
         <HeroSection />
         <NetworkSection />
         <EmergeSection />
+        <MarqueeBand />
         <DashboardSection />
         <UsersSection />
         <ServersSection />

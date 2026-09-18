@@ -1,6 +1,7 @@
 import { HeroCanvas } from '../components/HeroCanvas';
 import { SplitText } from '../components/SplitText';
 import { useInView } from '../hooks/useInView';
+import { SOCIAL_LINKS } from '../data/sections';
 
 export function HeroSection() {
   const { ref } = useInView<HTMLDivElement>({ once: true });
@@ -46,6 +47,26 @@ export function HeroSection() {
             <span className="hero__meta-label">Experience</span>
             <span className="hero__meta-value">Showcase</span>
           </div>
+        </div>
+
+        <div className="hero__cta-row" data-reveal>
+          <a
+            className="btn btn--brand"
+            href="#network"
+          >
+            Explore the system
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <a
+            className="btn btn--ghost"
+            href={SOCIAL_LINKS.telegram}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Join the channel
+          </a>
         </div>
       </div>
 
@@ -103,12 +124,12 @@ export function HeroSection() {
           gap: var(--sp-4);
           padding: var(--sp-3) var(--sp-4);
           border-radius: var(--r-pill);
-          background: rgba(6, 7, 19, 0.5);
+          background: rgba(7, 8, 10, 0.5);
           backdrop-filter: blur(12px);
           border: 1px solid var(--line);
         }
         .hero__logo {
-          filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.45));
+          filter: hue-rotate(-62deg) saturate(1.15) drop-shadow(0 0 12px rgba(70, 183, 255, 0.45));
           animation: hero-logo-float 6s ease-in-out infinite;
         }
         .hero__brand-text { display: flex; flex-direction: column; line-height: 1.1; }
@@ -143,7 +164,7 @@ export function HeroSection() {
           gap: var(--sp-4);
           padding: var(--sp-3) var(--sp-5);
           border-radius: var(--r-pill);
-          background: rgba(6, 7, 19, 0.5);
+          background: rgba(7, 8, 10, 0.5);
           backdrop-filter: blur(12px);
           border: 1px solid var(--line);
         }
@@ -166,14 +187,22 @@ export function HeroSection() {
         .hero__meta-dot {
           width: 6px; height: 6px;
           border-radius: 50%;
-          background: #2dd4bf;
-          box-shadow: 0 0 8px #2dd4bf;
+          background: #8bf3e6;
+          box-shadow: 0 0 8px #8bf3e6;
           animation: hero-meta-pulse 2s ease-in-out infinite;
         }
         .hero__meta-divider {
           width: 1px;
           height: 24px;
           background: var(--line-strong);
+        }
+
+        .hero__cta-row {
+          display: flex;
+          align-items: center;
+          gap: var(--sp-4);
+          flex-wrap: wrap;
+          pointer-events: auto;
         }
 
         .hero__scroll {
@@ -229,8 +258,8 @@ export function HeroSection() {
           50% { transform: translateY(-4px); }
         }
         @keyframes hero-meta-pulse {
-          0%, 100% { opacity: 1; box-shadow: 0 0 8px #2dd4bf; }
-          50% { opacity: 0.6; box-shadow: 0 0 4px #2dd4bf; }
+          0%, 100% { opacity: 1; box-shadow: 0 0 8px #8bf3e6; }
+          50% { opacity: 0.6; box-shadow: 0 0 4px #8bf3e6; }
         }
         @keyframes hero-scroll-pulse {
           0%, 100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }

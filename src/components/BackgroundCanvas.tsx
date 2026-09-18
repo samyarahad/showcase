@@ -41,7 +41,7 @@ export function BackgroundCanvas() {
         vx: (Math.random() - 0.5) * 0.08,
         vy: (Math.random() - 0.5) * 0.08,
         r: Math.random() * 1.2 + 0.4,
-        hue: 250 + Math.random() * 30,
+        hue: 200 + Math.random() * 32,
       }));
     }
 

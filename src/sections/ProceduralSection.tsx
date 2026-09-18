@@ -76,8 +76,8 @@ export function ProceduralSection({ id, eyebrow, headline, subline, variant, fea
           aspect-ratio: 16 / 11;
           border-radius: var(--r-2xl);
           background:
-            radial-gradient(ellipse at 50% 0%, rgba(168, 85, 247, 0.06), transparent 60%),
-            linear-gradient(180deg, rgba(15, 16, 36, 0.85), rgba(7, 8, 21, 0.95));
+            radial-gradient(ellipse at 50% 0%, rgba(70, 183, 255, 0.06), transparent 60%),
+            linear-gradient(180deg, rgba(11, 13, 16, 0.85), rgba(7, 8, 21, 0.95));
           border: 1px solid var(--line-strong);
           overflow: hidden;
           box-shadow: var(--shadow-float);
@@ -85,7 +85,7 @@ export function ProceduralSection({ id, eyebrow, headline, subline, variant, fea
         .proc-section__visual-glow {
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(168, 85, 247, 0.14), transparent 70%);
+          background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(70, 183, 255, 0.14), transparent 70%);
           pointer-events: none;
           z-index: 1;
         }
@@ -117,8 +117,8 @@ export function ProceduralSection({ id, eyebrow, headline, subline, variant, fea
         .proc-section__overlay-dot {
           width: 6px; height: 6px;
           border-radius: 50%;
-          background: #2dd4bf;
-          box-shadow: 0 0 8px #2dd4bf;
+          background: #8bf3e6;
+          box-shadow: 0 0 8px #8bf3e6;
           animation: proc-pulse 1.8s ease-in-out infinite;
         }
         .proc-section__overlay-text {
@@ -145,7 +145,7 @@ export function ProceduralSection({ id, eyebrow, headline, subline, variant, fea
           text-transform: uppercase;
           padding: 4px 10px;
           border-radius: var(--r-pill);
-          background: rgba(6, 7, 19, 0.7);
+          background: rgba(7, 8, 10, 0.7);
           border: 1px solid var(--line);
           color: var(--text-lo);
           backdrop-filter: blur(6px);

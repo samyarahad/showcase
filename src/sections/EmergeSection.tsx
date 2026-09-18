@@ -85,7 +85,7 @@ export function EmergeSection() {
           padding: 6px 12px;
           border: 1px solid var(--line);
           border-radius: var(--r-pill);
-          background: rgba(6, 7, 19, 0.7);
+          background: rgba(7, 8, 10, 0.7);
           backdrop-filter: blur(6px);
           white-space: nowrap;
         }

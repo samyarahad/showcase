@@ -4,6 +4,25 @@
 > A cinematic, immersive showcase website for the Pixel & Ping product.
 > Frontend-only, static, deployable to GitHub Pages for free.
 
+## 🌊 v3 — "Ink & Tide" premium redesign
+
+A fusion of [Scrolltide](https://www.scrolltide.co/)'s cinematic aesthetic
+with the Pixel & Ping immersive canvas:
+
+| Token | Value | Role |
+|---|---|---|
+| Ink | `#07080a` / `#0b0d10` | deep neutral backgrounds |
+| Bone | `#f3f5f8` | primary text |
+| Tide | `#46b7ff` | the single hero accent |
+| Deep ocean | `#2e7dff` | gradient partner |
+| Seafoam | `#8bf3e6` | secondary highlight |
+
+**Typography:** Bricolage Grotesque (display) · Inter (body) · Space Mono (labels)
+**Motion:** ease-out-quint `cubic-bezier(.22,1,.36,1)` everywhere
+**Geometry:** floating pill nav, rounded-2xl cards, hairline borders
+**Signature details:** infinite module marquee, tide-glow hover lifts,
+particle canvases retuned to ocean hues, pill CTAs in hero & finale.
+
 This repository contains a premium, scroll-driven, WebGL-accelerated
 showcase experience. It is **presentational only** — no backend, no
 database, no API, no authentication, no fake data, no pricing, no

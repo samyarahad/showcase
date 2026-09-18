@@ -4,14 +4,14 @@ import { useInView } from '../hooks/useInView';
 import { sectionIndex } from '../data/sections';
 
 const STATS = [
-  { label: 'TOTAL USERS',         color: '#2dd4bf', desc: 'Every identity in your network' },
-  { label: 'ACTIVE USERS',        color: '#a855f7', desc: 'Currently provisioned access' },
-  { label: 'ONLINE USERS',        color: '#22d3ee', desc: 'Connected right now' },
-  { label: 'DAILY REQUESTS',      color: '#f59e0b', desc: 'Aggregated across endpoints' },
-  { label: 'ACTIVE SERVERS',      color: '#6366f1', desc: 'Registered & responding' },
-  { label: 'CLOUDFLARE ACCOUNTS', color: '#2dd4bf', desc: 'Linked infrastructure' },
-  { label: 'TOTAL TRAFFIC',       color: '#ec4899', desc: 'Sum across all routes' },
-  { label: 'IP HEALTH',           color: '#f59e0b', desc: 'Reachable / total' },
+  { label: 'TOTAL USERS',         color: '#8bf3e6', desc: 'Every identity in your network' },
+  { label: 'ACTIVE USERS',        color: '#46b7ff', desc: 'Currently provisioned access' },
+  { label: 'ONLINE USERS',        color: '#46b7ff', desc: 'Connected right now' },
+  { label: 'DAILY REQUESTS',      color: '#ffb454', desc: 'Aggregated across endpoints' },
+  { label: 'ACTIVE SERVERS',      color: '#2e7dff', desc: 'Registered & responding' },
+  { label: 'CLOUDFLARE ACCOUNTS', color: '#8bf3e6', desc: 'Linked infrastructure' },
+  { label: 'TOTAL TRAFFIC',       color: '#46b7ff', desc: 'Sum across all routes' },
+  { label: 'IP HEALTH',           color: '#ffb454', desc: 'Reachable / total' },
 ];
 
 export function DashboardSection() {
@@ -79,7 +79,7 @@ export function DashboardSection() {
           gap: var(--sp-3);
           padding: var(--sp-4);
           border-radius: var(--r-md);
-          background: rgba(20, 22, 48, 0.42);
+          background: rgba(16, 19, 24, 0.42);
           border: 1px solid var(--line);
           backdrop-filter: blur(8px);
           transition: transform 0.4s var(--ease-out), border-color 0.4s, background 0.4s;
@@ -87,7 +87,7 @@ export function DashboardSection() {
         .dashboard__stat:hover {
           transform: translateY(-2px);
           border-color: var(--line-strong);
-          background: rgba(20, 22, 48, 0.62);
+          background: rgba(16, 19, 24, 0.62);
         }
         .dashboard__stat-dot {
           width: 8px; height: 8px;

@@ -71,7 +71,7 @@ export function NetworkSection() {
           margin-top: var(--sp-7);
           padding: var(--sp-4) var(--sp-5);
           border-radius: var(--r-pill);
-          background: rgba(6, 7, 19, 0.55);
+          background: rgba(7, 8, 10, 0.55);
           backdrop-filter: blur(12px);
           border: 1px solid var(--line);
           width: fit-content;

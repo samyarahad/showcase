@@ -101,13 +101,13 @@ export function CustomCursor() {
           height: 6px;
           border-radius: 50%;
           background: #fff;
-          box-shadow: 0 0 10px rgba(168, 85, 247, 0.9);
+          box-shadow: 0 0 10px rgba(70, 183, 255, 0.9);
         }
         .cursor-ring {
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          border: 1px solid rgba(168, 85, 247, 0.5);
+          border: 1px solid rgba(70, 183, 255, 0.5);
           transition:
             opacity 0.3s var(--ease-out),
             width 0.4s var(--ease-out),
@@ -118,8 +118,8 @@ export function CustomCursor() {
         .cursor-ring.is-hover {
           width: 64px;
           height: 64px;
-          border-color: rgba(168, 85, 247, 0.9);
-          background: rgba(168, 85, 247, 0.06);
+          border-color: rgba(70, 183, 255, 0.9);
+          background: rgba(70, 183, 255, 0.06);
         }
         .cursor-label {
           font-family: var(--font-mono);
@@ -127,7 +127,7 @@ export function CustomCursor() {
           letter-spacing: 0.18em;
           text-transform: uppercase;
           color: var(--text-hi);
-          background: rgba(6, 7, 19, 0.85);
+          background: rgba(7, 8, 10, 0.85);
           backdrop-filter: blur(8px);
           padding: 4px 10px;
           border-radius: var(--r-pill);
