@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pixel-ping.github.io/pixel-ping-showcase/sitemap.xml
+Sitemap: https://samyarahad.github.io/showcase/sitemap.xml

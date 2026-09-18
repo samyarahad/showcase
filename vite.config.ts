@@ -22,7 +22,7 @@ import react from '@vitejs/plugin-react';
 //   VITE_BASE_PATH=/my-repo/ npm run build
 // -----------------------------------------------------------------------------
 
-const repoName = 'pixel-ping-showcase';
+const repoName = 'showcase';
 
 export default defineConfig({
   plugins: [react()],
