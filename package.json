@@ -1,0 +1,31 @@
+{
+  "name": "pixel-ping-showcase",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Pixel & Ping — Premium Immersive Showcase Website",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "build:fast": "vite build",
+    "preview": "vite preview --port 4173",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "lenis": "^1.1.20",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.171.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/three": "^0.171.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11"
+  }
+}

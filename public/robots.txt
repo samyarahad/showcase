@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pixel-ping.github.io/pixel-ping-showcase/sitemap.xml
